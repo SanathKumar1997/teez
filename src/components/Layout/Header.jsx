@@ -25,8 +25,8 @@ const Header = () => {
                     <button className="md:hidden p-2 hover:bg-gray-100 rounded-full">
                         <Menu className="w-6 h-6" />
                     </button>
-                    <Link to="/" className="text-2xl font-bold tracking-tighter">
-                        TEEZ
+                    <Link to="/" className="flex items-center">
+                        <img src="/logo.svg" alt="TEEZ Logo" className="h-10" />
                     </Link>
                 </div>
 
@@ -61,6 +61,11 @@ const Header = () => {
                             <Link to="/dashboard" className="text-sm font-medium hidden md:block hover:text-accent">
                                 Hi, {user.name.split(' ')[0]}
                             </Link>
+                            {user.is_admin && (
+                                <Link to="/admin" className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full hover:bg-purple-200 font-medium">
+                                    Admin
+                                </Link>
+                            )}
                             <button onClick={logout} className="text-xs text-gray-500 hover:text-red-500">Logout</button>
                         </div>
                     ) : (

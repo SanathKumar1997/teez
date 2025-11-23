@@ -1,0 +1,10 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- T-shirt icon -->
+  <path d="M8 12L12 8L16 12V16L14 18V28H10V18L8 16V12Z" fill="#14B8A6" stroke="#14B8A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- TEEZ text -->
+  <text x="24" y="26" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1F2937">TEEZ</text>
+  
+  <!-- Tagline -->
+  <text x="24" y="34" font-family="Arial, sans-serif" font-size="6" fill="#6B7280">WEAR YOUR STYLE</text>
+</svg>

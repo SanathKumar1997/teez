@@ -12,21 +12,29 @@ router.post('/register', async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const query = `INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)`;
 
-        db.run(query, [name, email, hashedPassword], function (err) {
-            if (err) {
-                if (err.message.includes('UNIQUE constraint failed')) {
-                    return res.status(400).json({ error: 'Email already exists' });
+        // Check if this is the first user or admin email
+        db.get('SELECT COUNT(*) as count FROM users', [], (err, row) => {
+            const isFirstUser = row.count === 0;
+            const isAdminEmail = email.toLowerCase().includes('admin@teez.com');
+            const is_admin = isFirstUser || isAdminEmail ? 1 : 0;
+
+            const query = `INSERT INTO users (name, email, password_hash, is_admin) VALUES (?, ?, ?, ?)`;
+
+            db.run(query, [name, email, hashedPassword, is_admin], function (err) {
+                if (err) {
+                    if (err.message.includes('UNIQUE constraint failed')) {
+                        return res.status(400).json({ error: 'Email already exists' });
+                    }
+                    return res.status(500).json({ error: err.message });
                 }
-                return res.status(500).json({ error: err.message });
-            }
 
-            const token = jwt.sign({ id: this.lastID, email }, JWT_SECRET, { expiresIn: '24h' });
-            res.status(201).json({
-                message: 'User registered successfully',
-                token,
-                user: { id: this.lastID, name, email }
+                const token = jwt.sign({ id: this.lastID, email, is_admin }, JWT_SECRET, { expiresIn: '24h' });
+                res.status(201).json({
+                    message: 'User registered successfully',
+                    token,
+                    user: { id: this.lastID, name, email, is_admin: Boolean(is_admin) }
+                });
             });
         });
     } catch (error) {
@@ -45,11 +53,11 @@ router.post('/login', (req, res) => {
         const validPassword = await bcrypt.compare(password, user.password_hash);
         if (!validPassword) return res.status(401).json({ error: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: '24h' });
+        const token = jwt.sign({ id: user.id, email: user.email, is_admin: user.is_admin }, JWT_SECRET, { expiresIn: '24h' });
         res.json({
             message: 'Login successful',
             token,
-            user: { id: user.id, name: user.name, email: user.email }
+            user: { id: user.id, name: user.name, email: user.email, is_admin: Boolean(user.is_admin) }
         });
     });
 });

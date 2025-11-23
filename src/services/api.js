@@ -79,5 +79,56 @@ export const api = {
         const response = await fetch(`${API_URL}/orders/user/${email}`);
         if (!response.ok) throw new Error('Failed to fetch orders');
         return response.json();
+    },
+
+    // Admin methods
+    async createProduct(productData, token) {
+        const response = await fetch(`${API_URL}/products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(productData),
+        });
+        if (!response.ok) throw new Error('Failed to create product');
+        return response.json();
+    },
+
+    async updateProduct(id, productData, token) {
+        const response = await fetch(`${API_URL}/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(productData),
+        });
+        if (!response.ok) throw new Error('Failed to update product');
+        return response.json();
+    },
+
+    async deleteProduct(id, token) {
+        const response = await fetch(`${API_URL}/products/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        if (!response.ok) throw new Error('Failed to delete product');
+        return response.json();
+    },
+
+    async applyDiscount(id, discount_percentage, token) {
+        const response = await fetch(`${API_URL}/products/${id}/discount`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ discount_percentage }),
+        });
+        if (!response.ok) throw new Error('Failed to apply discount');
+        return response.json();
     }
 };

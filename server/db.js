@@ -22,6 +22,9 @@ function initDb() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
       price REAL NOT NULL,
+      original_price REAL,
+      discount_percentage REAL DEFAULT 0,
+      stock_quantity INTEGER DEFAULT 100,
       image TEXT,
       category TEXT,
       description TEXT,
@@ -47,110 +50,119 @@ function initDb() {
       name TEXT NOT NULL,
       email TEXT UNIQUE NOT NULL,
       password_hash TEXT NOT NULL,
+      is_admin BOOLEAN DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
         // Seed Data if empty
         db.get("SELECT count(*) as count FROM products", (err, row) => {
             if (row.count === 0) {
-                console.log("Seeding database with realistic data...");
+                console.log("Seeding database with category-based products...");
                 const products = [
                     {
-                        title: "Classic White Essential Tee",
+                        title: 'Classic White Essential Tee',
                         price: 29.99,
-                        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "t-shirts",
-                        description: "The perfect white tee. Made from 100% organic cotton, this shirt features a relaxed fit and durable stitching. A wardrobe staple for any occasion.",
+                        image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',
+                        category: 'new-arrivals',
+                        description: 'Perfect white tee for everyday wear. Made from 100% organic cotton.',
                         rating: 4.8,
                         reviews: 124,
-                        colors: JSON.stringify(["White", "Black", "Grey"]),
-                        sizes: JSON.stringify(["S", "M", "L", "XL"])
+                        colors: JSON.stringify(['White', 'Black', 'Grey']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL']),
+                        stock_quantity: 100
                     },
                     {
-                        title: "Urban Street Heavyweight Polo",
-                        price: 45.00,
-                        image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "polos",
-                        description: "A modern take on the classic polo. Heavyweight fabric with a structured collar and dropped shoulders for a streetwear aesthetic.",
-                        rating: 4.6,
+                        title: 'Code While Alive - Programming Tee',
+                        price: 34.99,
+                        image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500',
+                        category: 'programming',
+                        description: 'For developers who live and breathe code. Premium quality print.',
+                        rating: 4.9,
                         reviews: 89,
-                        colors: JSON.stringify(["Black", "Navy", "Burgundy"]),
-                        sizes: JSON.stringify(["M", "L", "XL", "XXL"])
+                        colors: JSON.stringify(['Black', 'Navy', 'Dark Grey']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL', 'XXL']),
+                        stock_quantity: 75
                     },
                     {
-                        title: "Vintage Wash Long Sleeve",
-                        price: 38.50,
-                        image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "long-sleeve",
-                        description: "Soft, vintage-washed long sleeve tee with a lived-in feel from day one. Perfect for layering or wearing solo.",
+                        title: 'May The Source Be With You',
+                        price: 32.99,
+                        image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500',
+                        category: 'geeky',
+                        description: 'Geeky Star Wars inspired tee for true fans.',
                         rating: 4.7,
-                        reviews: 56,
-                        colors: JSON.stringify(["Charcoal", "Olive", "Navy"]),
-                        sizes: JSON.stringify(["S", "M", "L", "XL"])
+                        reviews: 156,
+                        colors: JSON.stringify(['Navy', 'Black', 'Royal Blue']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL']),
+                        stock_quantity: 90
                     },
                     {
-                        title: "Performance Active Tee",
-                        price: 32.00,
-                        image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "t-shirts",
-                        description: "Moisture-wicking fabric keeps you cool and dry during intense workouts. Athletic fit with 4-way stretch.",
-                        rating: 4.9,
-                        reviews: 210,
-                        colors: JSON.stringify(["Blue", "Black", "Neon Green"]),
-                        sizes: JSON.stringify(["S", "M", "L", "XL"])
+                        title: 'Vintage Biker Motorcycle Tee',
+                        price: 36.99,
+                        image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500',
+                        category: 'biker',
+                        description: 'Classic biker design with vintage motorcycle graphics.',
+                        rating: 4.6,
+                        reviews: 67,
+                        colors: JSON.stringify(['Grey', 'Black', 'Olive']),
+                        sizes: JSON.stringify(['M', 'L', 'XL', 'XXL']),
+                        stock_quantity: 60
                     },
                     {
-                        title: "Premium Cotton V-Neck",
-                        price: 24.99,
-                        image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "t-shirts",
-                        description: "A refined V-neck tee made from Supima cotton. Silky soft feel with a flattering cut.",
-                        rating: 4.5,
-                        reviews: 78,
-                        colors: JSON.stringify(["White", "Black", "Navy"]),
-                        sizes: JSON.stringify(["S", "M", "L"])
-                    },
-                    {
-                        title: "Graphic Print 'Sunset' Tee",
-                        price: 35.00,
-                        image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "t-shirts",
-                        description: "Limited edition graphic tee featuring an abstract sunset design. Screen printed on our signature heavyweight cotton blank.",
+                        title: 'Rock Band Music Tee',
+                        price: 31.99,
+                        image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500',
+                        category: 'music',
+                        description: 'For music lovers and rock enthusiasts.',
                         rating: 4.8,
-                        reviews: 150,
-                        colors: JSON.stringify(["Black", "White"]),
-                        sizes: JSON.stringify(["S", "M", "L", "XL"])
+                        reviews: 98,
+                        colors: JSON.stringify(['Black', 'White', 'Red']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL']),
+                        stock_quantity: 85
                     },
                     {
-                        title: "Slim Fit Pique Polo",
-                        price: 42.00,
-                        image: "https://images.unsplash.com/photo-1593030761757-71fae45fa317?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "polos",
-                        description: "Classic pique polo with a slim, tailored fit. Features mother-of-pearl buttons and ribbed cuffs.",
-                        rating: 4.4,
-                        reviews: 45,
-                        colors: JSON.stringify(["White", "Navy", "Red"]),
-                        sizes: JSON.stringify(["S", "M", "L"])
-                    },
-                    {
-                        title: "Cozy Waffle Knit Long Sleeve",
-                        price: 48.00,
-                        image: "https://images.unsplash.com/photo-1613461920867-9ea125c9447c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                        category: "long-sleeve",
-                        description: "Textured waffle knit thermal shirt. Keeps you warm without overheating. Great for winter layering.",
+                        title: 'The Codefather - Programming',
+                        price: 33.99,
+                        image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500',
+                        category: 'movies',
+                        description: 'Godfather meets coding. Perfect for programmer movie fans.',
                         rating: 4.9,
-                        reviews: 92,
-                        colors: JSON.stringify(["Cream", "Grey", "Black"]),
-                        sizes: JSON.stringify(["S", "M", "L", "XL"])
+                        reviews: 142,
+                        colors: JSON.stringify(['White', 'Black', 'Grey']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL', 'XXL']),
+                        stock_quantity: 70
+                    },
+                    {
+                        title: 'Retro Sports Athletic Tee',
+                        price: 35.99,
+                        image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=500',
+                        category: 'sports',
+                        description: 'Vintage sports design with athletic vibes.',
+                        rating: 4.5,
+                        reviews: 73,
+                        colors: JSON.stringify(['Blue', 'Red', 'White']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL']),
+                        stock_quantity: 95
+                    },
+                    {
+                        title: 'Vintage Graphic Print Tee',
+                        price: 30.99,
+                        image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500',
+                        category: 'vintage',
+                        description: 'Classic vintage design with retro graphics.',
+                        rating: 4.7,
+                        reviews: 111,
+                        colors: JSON.stringify(['White', 'Cream', 'Light Grey']),
+                        sizes: JSON.stringify(['S', 'M', 'L', 'XL']),
+                        stock_quantity: 80
                     }
                 ];
 
-                const stmt = db.prepare("INSERT INTO products (title, price, image, category, description, rating, reviews, colors, sizes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                const stmt = db.prepare("INSERT INTO products (title, price, image, category, description, rating, reviews, colors, sizes, stock_quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 products.forEach(p => {
-                    stmt.run(p.title, p.price, p.image, p.category, p.description, p.rating, p.reviews, p.colors, p.sizes);
+                    stmt.run(p.title, p.price, p.image, p.category, p.description, p.rating, p.reviews, p.colors, p.sizes, p.stock_quantity);
                 });
                 stmt.finalize();
-                console.log("Database seeded successfully.");
+                console.log("Database seeded successfully with categorized products.");
             }
         });
     });
