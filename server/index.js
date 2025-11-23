@@ -40,6 +40,15 @@ app.post('/api/create-payment-intent', async (req, res) => {
     }
 });
 
+// Health check endpoint for CI/CD
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        service: 'teez-api'
+    });
+});
+
 // Health check
 app.get('/', (req, res) => {
     res.send('TEEZ API is running');
