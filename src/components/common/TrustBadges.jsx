@@ -21,7 +21,7 @@ const TrustBadges = () => {
         {
             icon: CreditCard,
             title: 'Safe Payment',
-            description: 'Stripe secured'
+            description: 'Razorpay secured'
         }
     ];
 

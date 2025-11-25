@@ -97,7 +97,7 @@ const Cart = () => {
                         </Link>
 
                         <p className="text-xs text-center text-gray-500 mt-4">
-                            Secure checkout powered by Stripe
+                            Secure checkout powered by Razorpay
                         </p>
                     </div>
                 </div>

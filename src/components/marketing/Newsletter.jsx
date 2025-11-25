@@ -21,7 +21,7 @@ const Newsletter = () => {
         <div className="bg-gradient-primary text-white rounded-2xl p-8 md:p-12">
             <div className="max-w-2xl mx-auto text-center">
                 <Mail className="w-12 h-12 mx-auto mb-4" />
-                <h3 className="text-2xl md:text-3xl font-bold mb-2">Join the TEEZ Family</h3>
+                <h3 className="text-2xl md:text-3xl font-bold mb-2">Join the TEEZI Family</h3>
                 <p className="text-white/90 mb-6">
                     Subscribe to get exclusive offers, style tips, and 15% off your first order!
                 </p>

@@ -120,7 +120,7 @@ const AdminDashboard = () => {
             {/* Welcome Message */}
             <div className="bg-gradient-to-r from-accent to-purple-600 text-white p-6 rounded-xl">
                 <h2 className="text-2xl font-bold mb-2">Welcome back, {user?.name}!</h2>
-                <p className="opacity-90">You have admin access to manage the TEEZ store.</p>
+                <p className="opacity-90">You have admin access to manage the TEEZI store.</p>
             </div>
         </div>
     );

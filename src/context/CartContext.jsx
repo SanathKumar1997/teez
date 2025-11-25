@@ -17,12 +17,15 @@ export const CartProvider = ({ children }) => {
     const addToCart = (product, quantity, size, color) => {
         setCart(prevCart => {
             const existingItemIndex = prevCart.findIndex(
-                item => item.id === product.id && item.size === size && item.color === color
+                item => item.id == product.id && item.size === size && item.color === color
             );
 
             if (existingItemIndex > -1) {
                 const newCart = [...prevCart];
-                newCart[existingItemIndex].quantity += quantity;
+                newCart[existingItemIndex] = {
+                    ...newCart[existingItemIndex],
+                    quantity: newCart[existingItemIndex].quantity + quantity
+                };
                 return newCart;
             } else {
                 return [...prevCart, { ...product, quantity, size, color }];

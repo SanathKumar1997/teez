@@ -26,7 +26,7 @@ const Header = () => {
                         <Menu className="w-6 h-6" />
                     </button>
                     <Link to="/" className="flex items-center">
-                        <img src="/logo.svg" alt="TEEZ Logo" className="h-10" />
+                        <img src="/logo.svg" alt="TEEZI Logo" className="h-10" />
                     </Link>
                 </div>
 

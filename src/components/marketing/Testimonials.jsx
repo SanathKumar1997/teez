@@ -8,7 +8,7 @@ const Testimonials = () => {
             role: 'Fashion Blogger',
             image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
             rating: 5,
-            text: 'TEEZ has the best quality t-shirts I\'ve ever owned. The fabric is soft, durable, and the fit is perfect!'
+            text: 'TEEZI has the best quality t-shirts I\'ve ever owned. The fabric is soft, durable, and the fit is perfect!'
         },
         {
             name: 'Michael Chen',
@@ -22,7 +22,7 @@ const Testimonials = () => {
             role: 'Student',
             image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
             rating: 5,
-            text: 'Fast shipping, great prices, and amazing customer service. TEEZ is now my go-to for all my t-shirt needs!'
+            text: 'Fast shipping, great prices, and amazing customer service. TEEZI is now my go-to for all my t-shirt needs!'
         }
     ];
 
@@ -32,7 +32,7 @@ const Testimonials = () => {
                 <div className="text-center mb-12 animate-slide-up">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Join thousands of happy customers who love their TEEZ products
+                        Join thousands of happy customers who love their TEEZI products
                     </p>
                 </div>
 

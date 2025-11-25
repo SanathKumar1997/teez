@@ -1,5 +1,5 @@
 {
-  "name": "teez",
+  "name": "teezi",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@stripe/react-stripe-js": "^5.4.0",
-    "@stripe/stripe-js": "^8.5.2",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -19,11 +17,11 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.554.0",
     "nodemon": "^3.1.11",
+    "razorpay": "^2.9.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.6",
-    "sqlite3": "^5.1.7",
-    "stripe": "^20.0.0"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

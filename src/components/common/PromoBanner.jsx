@@ -11,7 +11,7 @@ const PromoBanner = () => {
             <div className="container mx-auto flex items-center justify-center gap-2 text-sm md:text-base">
                 <span className="font-semibold">🎉 GRAND OPENING SALE!</span>
                 <span className="hidden sm:inline">Get 25% OFF on your first order</span>
-                <span className="font-bold">Use code: TEEZ25</span>
+                <span className="font-bold">Use code: TEEZI25</span>
             </div>
             <button
                 onClick={() => setIsVisible(false)}

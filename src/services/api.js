@@ -65,13 +65,13 @@ export const api = {
         return response.json();
     },
 
-    async createPaymentIntent(amount) {
-        const response = await fetch(`${API_URL}/create-payment-intent`, {
+    async createRazorpayOrder(amount) {
+        const response = await fetch(`${API_URL}/create-razorpay-order`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ amount }),
         });
-        if (!response.ok) throw new Error('Failed to create payment intent');
+        if (!response.ok) throw new Error('Failed to create Razorpay order');
         return response.json();
     },
 

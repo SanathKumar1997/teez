@@ -71,7 +71,7 @@ const ProductDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Image Gallery */}
                 <div className="space-y-4">
-                    <div className="aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden border border-gray-100">
+                    <div className="h-[50vh] md:h-[60vh] w-full bg-gray-100 rounded-2xl overflow-hidden border border-gray-100">
                         <img
                             src={product.image}
                             alt={product.title}

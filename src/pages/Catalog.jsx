@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search, Sparkles, TrendingUp } from 'lucide-react';
 import { api } from '../services/api';
-import ProductCard from '../components/Product/ProductCard';
+import ProductCard from '../components/Product/ProductCardV2';
 
 const Catalog = () => {
+    window.CATALOG_VERSION = 2;
     const [searchParams, setSearchParams] = useSearchParams();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -146,8 +147,8 @@ const Catalog = () => {
                                 key={category.id}
                                 onClick={() => handleCategoryChange(category.id)}
                                 className={`group relative px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 ${selectedCategory === category.id
-                                        ? `bg-gradient-to-r ${category.gradient} text-white shadow-xl scale-110`
-                                        : 'bg-white text-gray-700 hover:shadow-lg border-2 border-gray-100'
+                                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-xl scale-110`
+                                    : 'bg-white text-gray-700 hover:shadow-lg border-2 border-gray-100'
                                     }`}
                                 style={{
                                     animationDelay: `${index * 0.05}s`,

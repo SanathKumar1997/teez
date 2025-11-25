@@ -10,8 +10,8 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <img src="/logo.svg" alt="TEEZ.in Logo" className="h-10" />
-                            <h3 className="text-2xl font-bold text-white">TEEZ.in</h3>
+                            <img src="/logo.svg" alt="TEEZI.in Logo" className="h-10" />
+                            <h3 className="text-2xl font-bold text-white">TEEZI.in</h3>
                         </div>
                         <p className="text-gray-400 mb-6">
                             Premium quality t-shirts designed for comfort, style, and self-expression. Wear your story.
@@ -63,8 +63,8 @@ const Footer = () => {
                         <ul className="space-y-3 text-sm">
                             <li className="flex items-start gap-2">
                                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                                <a href="mailto:support@teez.in" className="hover:text-white transition-colors">
-                                    support@teez.in
+                                <a href="mailto:support@teezi.in" className="hover:text-white transition-colors">
+                                    support@teezi.in
                                 </a>
                             </li>
                             <li className="flex items-start gap-2">
@@ -85,7 +85,7 @@ const Footer = () => {
                 <div className="border-t border-gray-800 pt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-gray-500 text-sm">
-                            &copy; {new Date().getFullYear()} TEEZ.in. All rights reserved.
+                            &copy; {new Date().getFullYear()} TEEZI.in. All rights reserved.
                         </p>
                         <div className="flex gap-6 text-sm text-gray-500">
                             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

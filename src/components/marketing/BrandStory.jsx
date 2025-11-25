@@ -32,10 +32,10 @@ const BrandStory = () => {
                     {/* Brand Story */}
                     <div className="animate-slide-up">
                         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                            The <span className="text-gradient">TEEZ</span> Story
+                            The <span className="text-gradient">TEEZI</span> Story
                         </h2>
                         <p className="text-gray-700 mb-4 leading-relaxed">
-                            Founded in 2025, TEEZ was born from a simple idea: everyone deserves high-quality,
+                            Founded in 2025, TEEZI was born from a simple idea: everyone deserves high-quality,
                             comfortable t-shirts that express their unique style.
                         </p>
                         <p className="text-gray-700 mb-4 leading-relaxed">
@@ -45,7 +45,7 @@ const BrandStory = () => {
                         </p>
                         <p className="text-gray-700 leading-relaxed">
                             Whether you're looking for a classic essential or a custom design that tells your
-                            story, TEEZ has you covered. Join our community and wear your style with pride!
+                            story, TEEZI has you covered. Join our community and wear your style with pride!
                         </p>
                     </div>
 

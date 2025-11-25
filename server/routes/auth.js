@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
         // Check if this is the first user or admin email
         db.get('SELECT COUNT(*) as count FROM users', [], (err, row) => {
             const isFirstUser = row.count === 0;
-            const isAdminEmail = email.toLowerCase().includes('admin@teez.com');
+            const isAdminEmail = email.toLowerCase().includes('admin@teezi.com');
             const is_admin = isFirstUser || isAdminEmail ? 1 : 0;
 
             const query = `INSERT INTO users (name, email, password_hash, is_admin) VALUES (?, ?, ?, ?)`;

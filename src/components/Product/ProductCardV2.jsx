@@ -1,28 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ShoppingCart, Heart, Eye } from 'lucide-react';
-import { useCart } from '../../context/CartContext';
+import { Star, Heart, Eye } from 'lucide-react';
 
-const ProductCard = ({ product }) => {
+const ProductCardV2 = ({ product }) => {
     const [isLiked, setIsLiked] = useState(false);
-    const { addToCart } = useCart();
 
     const hasDiscount = product.discount_percentage > 0;
     const displayPrice = hasDiscount ? product.price : product.price;
     const originalPrice = hasDiscount ? product.original_price : null;
-
-    const handleQuickAdd = () => {
-        // Add product with default size and color
-        const defaultSize = product.sizes ? JSON.parse(product.sizes)[0] : 'M';
-        const defaultColor = product.colors ? JSON.parse(product.colors)[0] : 'Black';
-
-        addToCart({
-            ...product,
-            selectedSize: defaultSize,
-            selectedColor: defaultColor,
-            quantity: 1
-        });
-    };
 
     return (
         <div className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl">
@@ -56,11 +41,11 @@ const ProductCard = ({ product }) => {
                     <div className="bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl shadow-lg">
                         {hasDiscount ? (
                             <div className="flex flex-col items-end">
-                                <span className="text-xs text-gray-400 line-through">${originalPrice?.toFixed(2)}</span>
-                                <span className="text-lg font-bold text-primary">${displayPrice.toFixed(2)}</span>
+                                <span className="text-xs text-gray-400 line-through">₹{originalPrice?.toFixed(2)}</span>
+                                <span className="text-lg font-bold text-primary">₹{displayPrice.toFixed(2)}</span>
                             </div>
                         ) : (
-                            <span className="text-lg font-bold text-gray-900">${displayPrice.toFixed(2)}</span>
+                            <span className="text-lg font-bold text-gray-900">₹{displayPrice.toFixed(2)}</span>
                         )}
                     </div>
                 </div>
@@ -82,17 +67,6 @@ const ProductCard = ({ product }) => {
                     >
                         <Eye className="w-5 h-5" />
                     </Link>
-                </div>
-
-                {/* Quick Add to Cart - Bottom Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                    <button
-                        onClick={handleQuickAdd}
-                        className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 font-semibold flex items-center justify-center gap-2 hover:from-accent hover:to-primary transition-all duration-300"
-                    >
-                        <ShoppingCart className="w-5 h-5" />
-                        Quick Add
-                    </button>
                 </div>
             </div>
 
@@ -142,4 +116,4 @@ const ProductCard = ({ product }) => {
     );
 };
 
-export default ProductCard;
+export default ProductCardV2;
